@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d_12sdp"
+            android:inputType="textCapWords"
+            android:fontFamily="@font/gilroy_light"
+            android:textColor="@color/black"
+            android:textSize="@dimen/d_14ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_1sdp"
+            android:layout_marginLeft="@dimen/d_12sdp"
+            android:layout_marginTop="@dimen/d_12sdp"
+            android:layout_marginRight="@dimen/d_12sdp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
