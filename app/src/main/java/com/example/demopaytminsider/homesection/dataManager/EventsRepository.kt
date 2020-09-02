@@ -1,18 +1,18 @@
-package com.example.demopaytminsider.homeSection.dataManager
+package com.example.demopaytminsider.homesection.dataManager
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.demopaytminsider.helpers.Constants
-import com.example.demopaytminsider.helpers.UtilMethods
-import com.example.demopaytminsider.homeSection.model.HomePageModel
-import com.example.demopaytminsider.homeSection.model.ModelEvents
-import com.example.demopaytminsider.retrofitManager.ApiResponseCallback
-import com.example.demopaytminsider.retrofitManager.ApiServiceProvider
-import com.example.demopaytminsider.retrofitManager.UrlContainer
+import com.example.demopaytminsider.helpers.HelperMethods
+import com.example.demopaytminsider.homesection.model.HomePageModel
+import com.example.demopaytminsider.homesection.model.ModelEvents
+import com.example.demopaytminsider.retrofit.ApiResponseCallback
+import com.example.demopaytminsider.retrofit.ApiServiceProvider
+import com.example.demopaytminsider.retrofit.UrlContainer
 import kotlinx.coroutines.*
 import retrofit2.Response
 
-object EventsRepository : ApiResponseCallback {
+class EventsRepository : ApiResponseCallback {
     private val scope: CoroutineScope = CoroutineScope(Dispatchers.Default)
     private val parentSuperVisor = SupervisorJob()
     private val groupsLiveDataMap: HashMap<String, MutableLiveData<GroupWiseEventModelList>> by lazy {
@@ -29,7 +29,7 @@ object EventsRepository : ApiResponseCallback {
         ApiServiceProvider().enqueueApiCall(
             UrlContainer.BASE_URL,
             this,
-            UtilMethods.prepareFetchEventsHashMap(city)
+            HelperMethods.prepareFetchEventsHashMap(city)
         ).homePageData()
     }
 
@@ -40,7 +40,7 @@ object EventsRepository : ApiResponseCallback {
         masterEventsList.value = eventsModel
     }
 
-    private fun handleSuccess(responseModelEvents: ResponseModelEvents) {
+    private fun handleSuccess(responseModelEvents: ApiResponseModel) {
         val eventsModel = ModelEvents()
 
         when (val linkedHashMapOfEvents = responseModelEvents.list?.masterList) {
@@ -65,7 +65,7 @@ object EventsRepository : ApiResponseCallback {
         masterEventsList.value = eventsModel
     }
 
-    private fun setupGroupMap(responseModelEvents: ResponseModelEvents) {
+    private fun setupGroupMap(responseModelEvents: ApiResponseModel) {
         setupHomePage(responseModelEvents)
         if (responseModelEvents.groups != null && responseModelEvents.groups.size > 0) {
             responseModelEvents.groups.forEach {
@@ -78,20 +78,22 @@ object EventsRepository : ApiResponseCallback {
         }
     }
 
-    private fun setupHomePage(responseModelEvents: ResponseModelEvents) {
+    private fun setupHomePage(responseModelEvents: ApiResponseModel) {
         homePageLiveData.postValue(HomePageModel(responseModelEvents.popularEventList, responseModelEvents.featuredEventList))
     }
 
-    private fun setupGroupWiseList(responseModelEvents: ResponseModelEvents) {
+    private fun setupGroupWiseList(responseModelEvents: ApiResponseModel) {
         responseModelEvents.list?.groupList?.let { groupMap ->
-            responseModelEvents.groups!!.forEach { groupName ->
+            responseModelEvents.groups?.forEach { groupName ->
                 val modelList: ArrayList<MasterListEventModel> = ArrayList()
                 if (groupMap.containsKey(groupName)) {
                     val keyList = groupMap[groupName]
                     keyList?.forEach { groupkey ->
                         responseModelEvents.list.masterList?.let {
                             if (it.containsKey(groupkey) && it[groupkey] != null)
-                                modelList.add(it[groupkey]!!)
+                                it[groupkey]?.let { eventModel ->
+                                    modelList.add(eventModel)
+                                }
                         }
                     }
                 }
@@ -101,7 +103,7 @@ object EventsRepository : ApiResponseCallback {
     }
 
     override fun <T> onSuccessCallback(response: Response<T>, serviceCallId: Int) {
-        val responseModelEvents = response.body() as? ResponseModelEvents
+        val responseModelEvents = response.body() as? ApiResponseModel
         if (responseModelEvents == null) {
             handleFailure("body is empty")
         } else {

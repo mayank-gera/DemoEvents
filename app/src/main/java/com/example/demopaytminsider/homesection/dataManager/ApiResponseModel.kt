@@ -1,9 +1,9 @@
-package com.example.demopaytminsider.homeSection.dataManager
+package com.example.demopaytminsider.homesection.dataManager
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class ResponseModelEvents(
+data class ApiResponseModel(
     @SerializedName("groups")
     @Expose
     val groups : ArrayList<String>?,

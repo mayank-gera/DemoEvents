@@ -1,19 +1,21 @@
-package com.example.demopaytminsider.homeSection.fragments
+package com.example.demopaytminsider.homesection.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demopaytminsider.databinding.FragmentAllEventsHomeBinding
 import com.example.demopaytminsider.helpers.Constants
-import com.example.demopaytminsider.homeSection.adapter.AllEventsAdapter
-import com.example.demopaytminsider.homeSection.dataManager.MainViewModel
-import com.example.demopaytminsider.homeSection.model.HomePageModel
+import com.example.demopaytminsider.homesection.adapter.AllEventsAdapter
+import com.example.demopaytminsider.homesection.dataManager.MainViewModel
+import com.example.demopaytminsider.homesection.model.HomePageModel
 
 class AllEventsHomeFragment : Fragment() {
     private lateinit var mAdapter: AllEventsAdapter
@@ -50,8 +52,10 @@ class AllEventsHomeFragment : Fragment() {
     }
 
     private fun initObservers() {
-        if (activity != null) {
-            mEventMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        if (activity != null && activity is FragmentActivity) {
+            mEventMainViewModel =
+                ViewModelProvider(activity as FragmentActivity).get(MainViewModel::class.java)
+            Log.e("TAG AllEventsFrag", "" + mEventMainViewModel)
             if (mEventMainViewModel?.getModelForHome()?.hasActiveObservers() == false)
                 mEventMainViewModel?.getModelForHome()
                     ?.observe(viewLifecycleOwner, Observer {
@@ -61,7 +65,7 @@ class AllEventsHomeFragment : Fragment() {
         }
     }
 
-    private fun initViews(){
+    private fun initViews() {
         mAdapter = AllEventsAdapter(homePageModel)
         mBinding.rvEvents.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)

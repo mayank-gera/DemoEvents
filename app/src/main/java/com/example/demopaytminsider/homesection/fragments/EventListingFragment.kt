@@ -1,4 +1,4 @@
-package com.example.demopaytminsider.homeSection.fragments
+package com.example.demopaytminsider.homesection.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -7,14 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demopaytminsider.databinding.FragmentGenericAdapterBinding
 import com.example.demopaytminsider.helpers.Constants
-import com.example.demopaytminsider.homeSection.adapter.EventAdapter
-import com.example.demopaytminsider.homeSection.dataManager.MainViewModel
-import com.example.demopaytminsider.homeSection.dataManager.MasterListEventModel
+import com.example.demopaytminsider.homesection.adapter.EventAdapter
+import com.example.demopaytminsider.homesection.dataManager.MainViewModel
+import com.example.demopaytminsider.homesection.dataManager.MasterListEventModel
 import java.util.*
 
 class EventListingFragment : Fragment() {
@@ -59,8 +60,9 @@ class EventListingFragment : Fragment() {
     }
 
     private fun initObservers() {
-        if (activity != null) {
-            mEventMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        if (activity != null && activity is FragmentActivity) {
+            mEventMainViewModel =
+                ViewModelProvider(activity as FragmentActivity).get(MainViewModel::class.java)
             if (!TextUtils.isEmpty(groupTitle)) {
                 if (mEventMainViewModel?.getEventsForGroup(groupTitle!!)
                         ?.hasActiveObservers() == false

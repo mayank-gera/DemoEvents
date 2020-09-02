@@ -1,16 +1,15 @@
-package com.example.demopaytminsider.homeSection.adapter
+package com.example.demopaytminsider.homesection.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.demopaytminsider.R
 import com.example.demopaytminsider.databinding.LayoutEventItemBinding
-import com.example.demopaytminsider.homeSection.dataManager.MasterListEventModel
+import com.example.demopaytminsider.helpers.HelperMethods
+import com.example.demopaytminsider.helpers.setImageWithGlide
+import com.example.demopaytminsider.homesection.dataManager.MasterListEventModel
 
 class EventAdapter(
     private var mEventList: ArrayList<MasterListEventModel>? = null
@@ -35,22 +34,10 @@ class EventAdapter(
     override fun onBindViewHolder(holder: EventAdapter.MyViewHolder, position: Int) {
         val eventData = mEventList?.get(position)
         holder.itemBinding.model = eventData
-        holder.itemBinding.eventPrice.text = if (eventData?.eventPriceDisplayString?.equals(
-                "0",
-                ignoreCase = false
-            ) == true
-        ) "FREE" else "₹${eventData?.eventPriceDisplayString}"
+        holder.itemBinding.eventPrice.text = HelperMethods.withPriceOrFree(eventData?.eventPriceDisplayString)
         holder.itemBinding.eventDate.isSelected = true
-        setImageWithGlide(holder.itemBinding.eventIv, eventData)
-    }
-
-    private fun setImageWithGlide(eventIv: ImageView, eventData: MasterListEventModel?) {
         eventData?.horizontalCoverImage?.let {
-            Glide
-                .with(mContext)
-                .load(it)
-                .placeholder(R.drawable.bg_default_event)
-                .into(eventIv)
+            holder.itemBinding.eventIv.setImageWithGlide(it)
         }
     }
 

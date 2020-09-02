@@ -1,4 +1,4 @@
-package com.example.demopaytminsider.retrofitManager
+package com.example.demopaytminsider.retrofit
 
 interface UrlContainer {
     companion object {

@@ -1,4 +1,4 @@
-package com.example.demopaytminsider.homeSection.adapter
+package com.example.demopaytminsider.homesection.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demopaytminsider.R
 import com.example.demopaytminsider.databinding.LayoutProductSectionBinding
-import com.example.demopaytminsider.homeSection.model.HomePageModel
+import com.example.demopaytminsider.homesection.model.HomePageModel
 
 class AllEventsAdapter(private var mHomePageModel: HomePageModel? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

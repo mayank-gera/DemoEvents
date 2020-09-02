@@ -1,6 +1,6 @@
-package com.example.demopaytminsider.retrofitManager
+package com.example.demopaytminsider.retrofit
 
-import com.example.demopaytminsider.homeSection.dataManager.ResponseModelEvents
+import com.example.demopaytminsider.homesection.dataManager.ApiResponseModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +26,7 @@ class RetrofitCallbackManager (private var apiInterface: ApiInterface?, private 
     //add all apiCallMethods
     fun homePageData(){
         try {
-            val call: Call<ResponseModelEvents?>? = apiInterface?.homePageData(fieldMap!!)
+            val call: Call<ApiResponseModel?>? = apiInterface?.homePageData(fieldMap!!)
             call?.let { sendCallbacks(it) }
         } catch (e:Exception) {
             apiResponseCallback?.onFailureCallback(e.message,apiProviderConstants)

@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.example.demopaytminsider.homeSection.dataManager.MasterListEventModel" />
+            type="com.example.demopaytminsider.homesection.dataManager.MasterListEventModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"

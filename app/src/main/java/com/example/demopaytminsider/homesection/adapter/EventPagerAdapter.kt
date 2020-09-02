@@ -1,12 +1,12 @@
-package com.example.demopaytminsider.homeSection.adapter
+package com.example.demopaytminsider.homesection.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.demopaytminsider.helpers.Constants
-import com.example.demopaytminsider.homeSection.fragments.AllEventsHomeFragment
-import com.example.demopaytminsider.homeSection.fragments.EventListingFragment
+import com.example.demopaytminsider.homesection.fragments.AllEventsHomeFragment
+import com.example.demopaytminsider.homesection.fragments.EventListingFragment
 
 
 class EventPagerAdapter(fa: FragmentActivity, private val groups: ArrayList<String>) :

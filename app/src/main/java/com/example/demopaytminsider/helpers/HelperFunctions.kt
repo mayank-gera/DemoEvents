@@ -4,13 +4,13 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.view.MotionEvent
-import androidx.core.view.get
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import kotlin.math.abs
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.example.demopaytminsider.R
+import kotlin.collections.HashMap
+import kotlin.collections.set
 
-class UtilMethods {
+class HelperMethods {
     companion object {
         fun prepareFetchEventsHashMap(city: String?): HashMap<String, String> {
             val hashMap = HashMap<String, String>()
@@ -18,6 +18,14 @@ class UtilMethods {
             hashMap[Constants.PARAM_FILTER_BY] = "go-out"
             hashMap[Constants.PARAM_CITY] = city ?: Constants.DEFAULT_CITY
             return hashMap
+        }
+
+        fun withPriceOrFree(price: String?): String {
+            return if (price?.equals(
+                    "0",
+                    ignoreCase = false
+                ) == true
+            ) "FREE" else "₹${price}"
         }
     }
 }
@@ -41,4 +49,10 @@ fun Context.iConnectedToNetwork(): Boolean {
     }
 }
 
-
+fun ImageView.setImageWithGlide(url: String) {
+    Glide
+        .with(context)
+        .load(url)
+        .placeholder(R.drawable.bg_default_event)
+        .into(this)
+}

@@ -1,4 +1,4 @@
-package com.example.demopaytminsider.retrofitManager
+package com.example.demopaytminsider.retrofit
 
 import com.example.demopaytminsider.helpers.Constants.Companion.API_CONSTANT_DEFAULT
 import okhttp3.OkHttpClient

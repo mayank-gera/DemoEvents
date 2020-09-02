@@ -9,13 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.demopaytminsider.databinding.ActivityMainBinding
+import com.example.demopaytminsider.datarepo.SharedPrefHelper
 import com.example.demopaytminsider.helpers.Constants
 import com.example.demopaytminsider.helpers.iConnectedToNetwork
-import com.example.demopaytminsider.homeSection.adapter.EventPagerAdapter
-import com.example.demopaytminsider.homeSection.dataManager.MainViewModel
-import com.example.demopaytminsider.homeSection.model.ModelEvents
+import com.example.demopaytminsider.homesection.adapter.EventPagerAdapter
+import com.example.demopaytminsider.homesection.dataManager.MainViewModel
+import com.example.demopaytminsider.homesection.model.ModelEvents
 import com.example.demopaytminsider.location.LocationBottomSheet
-import com.example.demopaytminsider.datarepo.SharedPrefHelper
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val VIEW_FOR_SUCCESS = 100

@@ -2,7 +2,6 @@ package com.example.demopaytminsider.location
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,8 @@ import com.example.demopaytminsider.databinding.BottomSheetOptionsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class LocationBottomSheet : BottomSheetDialogFragment(), LocationAdapter.OnItemClickedListener {
-    lateinit var mContext: Context
-    lateinit var mBinding: BottomSheetOptionsBinding
+    private lateinit var mContext: Context
+    private lateinit var mBinding: BottomSheetOptionsBinding
     private var mListener: CitySelectedListener? = null
 
     override fun onCreateView(
@@ -42,11 +41,10 @@ class LocationBottomSheet : BottomSheetDialogFragment(), LocationAdapter.OnItemC
         super.onAttach(context)
         mContext = context
         if (context is CitySelectedListener) {
-            mListener = context as CitySelectedListener
+            mListener = context
         } else {
             throw RuntimeException(
-                context.toString()
-                    .toString() + " must implement CitySelectedListener"
+                "$context must implement CitySelectedListener"
             )
         }
     }
@@ -57,7 +55,7 @@ class LocationBottomSheet : BottomSheetDialogFragment(), LocationAdapter.OnItemC
     }
 
     interface CitySelectedListener {
-        fun onCitySelected(item: String)
+        fun onCitySelected(city: String)
     }
 
     companion object {
