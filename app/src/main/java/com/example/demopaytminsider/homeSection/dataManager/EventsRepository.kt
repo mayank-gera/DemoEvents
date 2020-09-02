@@ -9,10 +9,7 @@ import com.example.demopaytminsider.homeSection.model.ModelEvents
 import com.example.demopaytminsider.retrofitManager.ApiResponseCallback
 import com.example.demopaytminsider.retrofitManager.ApiServiceProvider
 import com.example.demopaytminsider.retrofitManager.UrlContainer
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Response
 
 object EventsRepository : ApiResponseCallback {
@@ -118,5 +115,9 @@ object EventsRepository : ApiResponseCallback {
 
     fun getEventsForGroup(groupKey: String): LiveData<GroupWiseEventModelList>? {
         return groupsLiveDataMap[groupKey]
+    }
+
+    fun stopProcesses(){
+        parentSuperVisor.cancelChildren()
     }
 }

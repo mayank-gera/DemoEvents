@@ -29,7 +29,7 @@ class LocationAdapter(
     inner class MyViewHolder(val itemBinding: LayoutLocationItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         init {
-            itemView.setOnClickListener {
+            itemBinding.txtLocation.setOnClickListener {
                 if (adapterPosition != -1) {
                     onItemClickedListener.onItemClicked(cities[adapterPosition])
                 }

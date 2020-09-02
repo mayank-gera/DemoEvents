@@ -61,9 +61,8 @@ class AllEventsAdapter(private var mHomePageModel: HomePageModel? = null) :
     inner class FeaturedViewHolder(itemBinding: LayoutProductSectionBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         init {
-            itemBinding.sectionHeading.text = "FEATURED EVENTS"
+            itemBinding.sectionHeading.text = mContext.resources.getString(R.string.featured_event_heading)
             val adapter = SectionEventAdapter(mHomePageModel?.featuredEventList)
-//            itemBinding.sectionRV.attachSmoothScrollListener()
             itemBinding.sectionRV.layoutManager =
                 LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
             itemBinding.sectionRV.adapter = adapter
@@ -73,9 +72,8 @@ class AllEventsAdapter(private var mHomePageModel: HomePageModel? = null) :
     inner class PopularViewHolder(itemBinding: LayoutProductSectionBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         init {
-            itemBinding.sectionHeading.text = "POPULAR EVENTS"
+            itemBinding.sectionHeading.text = mContext.resources.getString(R.string.popular_event_heading)
             val adapter = SectionEventAdapter(mHomePageModel?.popularEventList)
-//            itemBinding.sectionRV.attachSmoothScrollListener()
             itemBinding.sectionRV.layoutManager =
                 LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
             itemBinding.sectionRV.adapter = adapter

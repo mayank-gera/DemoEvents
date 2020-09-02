@@ -6,6 +6,8 @@
     <string name="retry">RETRY</string>
     <string name="no_events_available_text">No Events Available</string>
     <string name="no_network_text">Network not available</string>
+    <string name="popular_event_heading">POPULAR EVENTS</string>
+    <string name="featured_event_heading">FEATURED EVENTS</string>
     <string name="choose_location">Choose Location</string>
     <string name="preference_file_key">demo_pref</string>
 

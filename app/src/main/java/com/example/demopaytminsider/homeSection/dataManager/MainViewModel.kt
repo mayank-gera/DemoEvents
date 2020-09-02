@@ -23,4 +23,10 @@ class MainViewModel : ViewModel() {
     fun getModelForHome(): LiveData<HomePageModel>? {
         return EventsRepository.homePageLiveData
     }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        EventsRepository.stopProcesses()
+    }
 }
